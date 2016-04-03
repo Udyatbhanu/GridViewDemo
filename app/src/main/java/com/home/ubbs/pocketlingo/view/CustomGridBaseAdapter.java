@@ -21,7 +21,7 @@ public class CustomGridBaseAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 12;
+        return 20;
     }
 
     @Override
@@ -41,20 +41,21 @@ public class CustomGridBaseAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder view;
+        ViewHolder viewHolder = new ViewHolder();
         LayoutInflater inflater = LayoutInflater.from(context);
 
 
         if (convertView == null) {
-            view = new ViewHolder();
-            convertView = inflater.inflate(R.layout.grid_item, null);
-            view.button = (Button)convertView.findViewById(R.id.button);
-            view.button.setOnClickListener(new ButtonOnClickListener(position));
-            convertView.setTag(view);
-        }else{
-            view = (ViewHolder) convertView.getTag();
-        }
 
+            convertView = inflater.inflate(R.layout.grid_item, null);
+            viewHolder.button = (Button)convertView.findViewById(R.id.button);
+
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        viewHolder.button.setText("Button position: "+position);
+        viewHolder.button.setOnClickListener(new ButtonOnClickListener(position));
 
 
 
